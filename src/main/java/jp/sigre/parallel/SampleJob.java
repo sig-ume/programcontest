@@ -16,7 +16,7 @@ public class SampleJob {
             e.printStackTrace();
         }
 
-        System.out.println(i + ":" + waitMills);
+        System.out.println(i + " : " + waitMills + " : " + Thread.currentThread().getName());
 
         bool = !bool;
     }
