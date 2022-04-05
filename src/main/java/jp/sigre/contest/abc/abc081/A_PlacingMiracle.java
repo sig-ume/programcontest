@@ -2,9 +2,9 @@ package jp.sigre.contest.abc.abc081;
 
 import java.util.Scanner;
 
-public class B_PlacingMiracle {
+public class A_PlacingMiracle {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
 
