@@ -1,4 +1,4 @@
-package jp.sigre.education_dp_contest.a_flog;
+package jp.sigre.contest.education_dp_contest.a_flog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
