@@ -19,7 +19,7 @@ public class B_HitAndBlow {
         System.out.println(ints[1]);
     }
 
-    public static List<Integer> getParams(Scanner sc, int count) {
+    private static List<Integer> getParams(Scanner sc, int count) {
 
         List<Integer> listA = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -29,7 +29,7 @@ public class B_HitAndBlow {
         return listA;
     }
 
-    public static int[] hitAndBlow(List<Integer> listA, List<Integer> listB) {
+    private static int[] hitAndBlow(List<Integer> listA, List<Integer> listB) {
         int hitCount = 0;
         int blowCount = 0;
 

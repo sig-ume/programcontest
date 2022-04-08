@@ -98,7 +98,7 @@ public class C_Collision2{
         int y;
         String direction;
 
-        public Point(int x, int y, String direction) {
+        private Point(int x, int y, String direction) {
             this.x = x;
             this.y = y;
             this.direction = direction;
