@@ -1,9 +1,6 @@
 package jp.sigre.contest.abc.abc247.e.other;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -35,10 +32,39 @@ public class Main {
         long result = 0;
 
         for (int[] ints : intsList) {
-            result += minMax(ints, max, min);
+            result += minMax2(ints, max, min);
         }
 
         System.out.println(result);
+    }
+
+
+    private static long minMax2(int[] ints, int max, int min) {
+
+        int minCount = 0;
+        int maxCount = 0;
+        long result = 0;
+
+        Deque<Integer> deque = new ArrayDeque<>();
+        for (int i = 0; i < ints.length; i++) {
+            int num = ints[i];
+            if (num == min) minCount++;
+            if (num == max) maxCount++;
+
+            deque.add(num);
+            int left;
+            while (minCount * maxCount != 0) {
+                result += ints.length - i;
+                if (deque.peekLast() == null) {
+                    break;
+                }
+                left = deque.pollFirst();
+                if (left == min) minCount--;
+                if (left == max) maxCount--;
+            }
+        }
+
+        return result;
     }
 
     private static long minMax(int[] ints, int max, int min) {
