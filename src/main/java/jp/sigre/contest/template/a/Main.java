@@ -1,4 +1,4 @@
-package jp.sigre.contest.abc.template.a;
+package jp.sigre.contest.template.a;
 
 import java.util.Scanner;
 
