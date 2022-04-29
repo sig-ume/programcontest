@@ -27,6 +27,7 @@ public class Main {
             int c = (left + right) / 2;
 
             if (as[c] < k) {
+                // cは対象外なので削る
                 left = c + 1;
             } else if (k <= as[c]) {
                 right = c;
