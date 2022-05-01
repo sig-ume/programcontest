@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    static long INF = 1000000000000L;
+    static long res = 0;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
