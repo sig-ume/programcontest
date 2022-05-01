@@ -2,6 +2,9 @@ package jp.sigre.contest.typical_algorithm.c;
 
 import java.util.Scanner;
 
+/**
+ * 巡回セールスマン(bit DP)
+ */
 public class Main {
     static long[][] memo;
     static long[][] roads;

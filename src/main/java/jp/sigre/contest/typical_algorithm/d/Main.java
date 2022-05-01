@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
+/**
+ * 単一始点最短経路(ダイクストラ)
+ */
 public class Main {
 
     public static void main(String[] args) {
