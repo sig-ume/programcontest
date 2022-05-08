@@ -1,2 +1,4 @@
 abc248,c
 abc248,d
+https://atcoder.jp/contests/abc250/tasks/abc250_c
+https://atcoder.jp/contests/abc250/tasks/abc250_d
