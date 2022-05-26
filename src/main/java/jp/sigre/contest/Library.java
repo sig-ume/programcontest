@@ -111,4 +111,69 @@ public class Library {
         return primeNumbers;
     }
 
+    /**
+     *
+     * @param xs Integer配列
+     * @param key 探索する値
+     * @return 「指定した値以上の要素」が初めて出現した位置
+     */
+    private static int lowerBound(int[] xs, int key) {
+        Integer[] xs2 = new Integer[xs.length];
+
+        for (int i = 0; i < xs.length; i++) {
+            xs2[i] = xs[i];
+        }
+
+        return lowerBound(xs2, key);
+    }
+
+    private static int lowerBound(Integer[] xs, int key) {
+        LowerBoundComparator<Integer> lowerBoundComparator = new LowerBoundComparator<>();
+        int result = Arrays.binarySearch(xs, key, lowerBoundComparator);
+
+        return (result >= 0) ? result : ~result;
+    }
+
+    /**
+     *
+     * @param xs Integer配列
+     * @param key 探索する値
+     * @return 「指定した値より大きい要素」が初めて出現した位置
+     */
+    private static int upperBound(int[] xs, int key) {
+        Integer[] xs2 = new Integer[xs.length];
+
+        for (int i = 0; i < xs.length; i++) {
+            xs2[i] = xs[i];
+        }
+
+        return upperBound(xs2, key);
+    }
+
+    private static int upperBound(Integer[] xs, int key) {
+        UpperBoundComparator<Integer> upperBoundComparator = new UpperBoundComparator<>();
+        int result = Arrays.binarySearch(xs, key, upperBoundComparator);
+
+        return (result >= 0) ? result : ~result;
+    }
+
+    @SuppressWarnings("ComparatorMethodParameterNotUsed")
+    static class LowerBoundComparator<T extends Comparable<? super T>>
+            implements Comparator<T>
+    {
+        public int compare(T x, T y)
+        {
+            return (x.compareTo(y) >= 0) ? 1 : -1;
+        }
+    }
+
+    @SuppressWarnings("ComparatorMethodParameterNotUsed")
+    static class UpperBoundComparator<T extends Comparable<? super T>>
+            implements Comparator<T>
+    {
+        public int compare(T x, T y)
+        {
+            return (x.compareTo(y) > 0) ? 1 : -1;
+        }
+    }
 }
