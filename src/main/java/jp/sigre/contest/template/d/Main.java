@@ -3,15 +3,16 @@ package jp.sigre.contest.template.d;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Main {
 
+    static FastScanner sc;
     static int N;
     static int tmp;
-    static Scanner sc;
+    static int result;
+
     public static void main(String[] args) {
-        sc = new Scanner(System.in);
+        sc = new FastScanner();
 
         N = sc.nextInt();
     }

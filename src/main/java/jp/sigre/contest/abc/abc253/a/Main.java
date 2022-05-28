@@ -1,31 +1,27 @@
-package jp.sigre.contest.template.b;
+package jp.sigre.contest.abc.abc253.a;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class Main {
 
-    static FastScanner sc;
-    static int N;
-    static int tmp;
-    static int result;
+    static int A;
+    static Scanner sc;
 
     public static void main(String[] args) {
-        sc = new FastScanner();
+        sc = new Scanner(System.in);
 
-        N = sc.nextInt();
+        A = sc.nextInt();
+        int B = sc.nextInt();
+        int C = sc.nextInt();
+
+        if (A <= B && B <= C) System.out.println("Yes");
+        else if (C <= B && B <= A) System.out.println("Yes");
+        else System.out.println("No");
     }
 
-    private static int[] getMultipleNumbers(int count) {
-        int[] nums = new int[count];
-
-        for (int i = 0; i < count; i++) {
-            nums[i] = sc.nextInt();
-        }
-
-        return nums;
-    }
 
     @SuppressWarnings("unused")
     static class FastScanner {

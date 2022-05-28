@@ -1,4 +1,4 @@
-package jp.sigre.contest.template.b;
+package jp.sigre.contest.abc.abc253.d;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,25 +6,52 @@ import java.util.NoSuchElementException;
 
 public class Main {
 
+    static long N;
     static FastScanner sc;
-    static int N;
-    static int tmp;
-    static int result;
 
     public static void main(String[] args) {
         sc = new FastScanner();
 
-        N = sc.nextInt();
+        N = sc.nextLong();
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+
+        long sum = (N * (N + 1)) / 2;
+
+        long aCount = N / A;
+        long aSum = (aCount + 1) * aCount / 2 * A;
+
+        long bCount = N / B;
+        long bSum = (bCount + 1) * bCount / 2 * B;
+
+        long lcm = calcLcm(A, B);
+        long abCount = N / lcm;
+        long abSum = (abCount + 1) * abCount / 2 * lcm;
+
+        System.out.println(sum - aSum - bSum + abSum);
     }
 
-    private static int[] getMultipleNumbers(int count) {
-        int[] nums = new int[count];
-
-        for (int i = 0; i < count; i++) {
-            nums[i] = sc.nextInt();
+    // 最大公約数を求める。
+    static long calcGcd(long m, long n) {
+        if (m <= 0 || n <= 0) {
+            throw new IllegalArgumentException("Arguments must be 1 and over.");
         }
+        if (m < n) {
+            long tmp = m;
+            m = n;
+            n = tmp;
+        }
+        long remainder;
+        while ((remainder = m % n) != 0) {
+            m = n;
+            n = remainder;
+        }
+        return n;
+    }
 
-        return nums;
+    // 最小公倍数を求める。
+    static long calcLcm(long m, long n) {
+        return m * n / calcGcd(m, n);
     }
 
     @SuppressWarnings("unused")

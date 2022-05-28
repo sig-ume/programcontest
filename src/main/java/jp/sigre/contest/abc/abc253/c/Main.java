@@ -1,30 +1,39 @@
-package jp.sigre.contest.template.b;
+package jp.sigre.contest.abc.abc253.c;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 public class Main {
 
-    static FastScanner sc;
-    static int N;
-    static int tmp;
-    static int result;
+    static int Q;
 
     public static void main(String[] args) {
-        sc = new FastScanner();
 
-        N = sc.nextInt();
-    }
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        FastScanner sc = new FastScanner();
+        Q = sc.nextInt();
 
-    private static int[] getMultipleNumbers(int count) {
-        int[] nums = new int[count];
-
-        for (int i = 0; i < count; i++) {
-            nums[i] = sc.nextInt();
+        for (int i = 0; i < Q; i++) {
+            int idx = sc.nextInt();
+            if (idx == 1) {
+                int x = sc.nextInt();
+                int count = map.getOrDefault(x, 0);
+                map.put(x, count + 1);
+            } else if (idx == 2) {
+                int x = sc.nextInt();
+                int count = map.getOrDefault(x, 0);
+                count = Math.max(count - sc.nextInt(), 0);
+                if (count <= 0) {
+                    map.remove(x);
+                } else {
+                    map.put(x, count);
+                }
+            } else {
+                System.out.println(map.lastKey() - map.firstKey());
+            }
         }
-
-        return nums;
     }
 
     @SuppressWarnings("unused")
