@@ -11,7 +11,7 @@ fun main() {
     val writer = PrintWriter(System.out, false)
 
     N = nextInt()
-    val a = Array(N) { nextInt() }
+    val a = nextInts()
     println(a.sum())
     writer.flush()
 }
@@ -27,5 +27,8 @@ fun next(): String {
 
 fun nextInt() = next().toInt()
 fun nextLong() = next().toLong()
-fun nextLine() = br.readLine()!!
 fun nextDouble() = next().toDouble()
+
+fun nextLine() = br.readLine()!!
+fun nextInts() = nextLine().split(" ").map(String::toInt)
+fun nextStrings() = nextLine().split(" ")
