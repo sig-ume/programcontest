@@ -73,6 +73,81 @@ class ABC254 {
         writer.flush()
     }
 
+    private fun d(primeFact: PrimeFact, n: Int): Long {
+        var result = 0L
+        for (i in n downTo 1) {
+            val divs = primeFact.getDivisors(i)
+            val sq: Long = i.toLong() * i
+            for (value in divs) {
+                if (value <= n && sq / value <= n) result++
+            }
+        }
+        return result
+    }
+
+    class PrimeFact(N: Int) {
+        private var spf = IntArray(N + 1) { it }
+
+        init {
+            var i = 2
+            do {
+                if (spf[i] < i) continue
+                var j = i * i
+                while (j <= N) {
+                    spf[j] = if (spf[j] == j) i else spf[j]
+                    j += i
+                }
+            } while (++i * i <= N)
+        }
+
+        fun factorize(n: Int): Map<Int, Int> {
+            var x = n
+            val res = HashMap<Int, Int>()
+            while (x != 1) {
+                val min = spf[x]
+                res.putIfAbsent(min, 0)
+                res[min] = res[min]!! + 1
+                x /= min
+            }
+
+            return res
+        }
+
+        fun isPrime(n: Int): Boolean {
+            return spf[n] == n
+        }
+
+        fun getDivisorCount(n: Int): Int {
+            //TODO
+            return n
+        }
+
+        fun getDivisors(n: Int): List<Long> {
+            val map = factorize(n)
+            val divs = arrayListOf<Pair<Int, Int>>()
+            map.forEach { (f, s) ->
+                // 通常は×2しない
+                divs.add(Pair(f, s * 2))
+            }
+
+            val ret = arrayListOf<Long>()
+            dfs(ret, divs, 0, 1)
+
+            return ret
+        }
+
+        private fun dfs(ret: ArrayList<Long>, divs: List<Pair<Int, Int>>, idx: Int, ans: Long) {
+            if (idx == divs.size) {
+                ret.add(ans)
+                return
+            }
+            var mul = 1L
+            repeat(divs[idx].second + 1) {
+                dfs(ret, divs, idx + 1, ans * mul)
+                mul *= divs[idx].first
+            }
+        }
+    }
 
     // region Scanner
     private var st = StringTokenizer("")

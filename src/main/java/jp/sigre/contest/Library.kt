@@ -58,7 +58,83 @@ public fun dp(sc: Scanner, n: Int, w: Int) {
 }
 
 /**
+ * SPF(Smallest Prime Factor: 各数に対する最小の素因数
+ * 素因数分解、素数確認
+ *
+ * 前処理: O(n log log n)
+ * クエリ: O(log n)
+ *
+ * https://qiita.com/rsk0315_h4x/items/ff3b542a4468679fb409
+ * https://algo-logic.info/prime-fact/
+ */
+@Suppress("unused", "RedundantVisibilityModifier")
+class PrimeFact(N: Int) {
+    private var spf = IntArray(N + 1) { it }
+
+    init {
+        var i = 2
+        do {
+            if (spf[i] < i) continue
+            var j = i * i
+            while (j <= N) {
+                spf[j] = if (spf[j] == j) i else spf[j]
+                j += i
+            }
+        } while (++i * i <= N)
+    }
+
+    fun factorize(n: Int): Map<Int, Int> {
+        var x = n
+        val res = HashMap<Int, Int>()
+        while (x != 1) {
+            val min = spf[x]
+            res.putIfAbsent(min, 0)
+            res[min] = res[min]!! + 1
+            x /= min
+        }
+
+        return res
+    }
+
+    fun isPrime(n: Int): Boolean {
+        return spf[n] == n
+    }
+
+    fun getDivisorCount(n: Int): Int {
+        //TODO
+        return n
+    }
+
+    fun getDivisors(n: Int): List<Long> {
+        val map = factorize(n)
+        val divs = arrayListOf<Pair<Int, Int>>()
+        map.forEach { (f, s) ->
+            // 通常は×2しない
+            divs.add(Pair(f, s * 2))
+        }
+
+        val ret = arrayListOf<Long>()
+        dfs(ret, divs, 0, 1)
+
+        return ret
+    }
+
+    private fun dfs(ret: ArrayList<Long>, divs: List<Pair<Int, Int>>, idx: Int, ans: Long) {
+        if (idx == divs.size) {
+            ret.add(ans)
+            return
+        }
+        var mul = 1L
+        repeat(divs[idx].second + 1) {
+            dfs(ret, divs, idx + 1, ans * mul)
+            mul *= divs[idx].first
+        }
+    }
+}
+
+/**
  * 素数リスト(エラトステネスの篩)
+ * TODO : SPFがあれば使わないか？
  *
  * @param maxNumber 素数を求めたい最大値
  * @return 素数リスト
