@@ -1,0 +1,44 @@
+＜Char＞
+・数字(a=1)からアルファベットへ変換
+    => (96+order).toChar()
+    // a = 97
+
+・Charを大文字に
+    => c.toUpperCase()
+    // deprecateだけど uppercaseChar() はAtcoder使用不可
+
+・Charを数字に
+    => '0'.toString().toInt()
+    // 直接toInt()すると48になる
+    // Character.getNumericValue や 0 を引くのも可
+
+＜string＞
+・Char配列に変換
+    => string.toCharArray()
+    // そこそこ処理が重そう
+
+＜配列＞
+・すべてが条件を満たす
+    => az.all { a -> 条件 }
+    // どれか1つが条件を満たすなら any
+
+＜Pair＞
+・2つの値でソート
+    => list.sortedWith(compareBy<Pair<Int, Int>> { it.first }.thenByDescending { it.second })
+
+＜forループ＞
+・インデックスでループ
+    => for (i in S.indices) {
+
+・インデックスと値でループ
+    => for ((i, v) in S.withIndex()) {
+
+＜リスト＞
+・宣言(編集可能)
+    => val list = mutableListOf<Pair<Int, Int>>()
+
+＜ビット演算＞
+・シフト、比較
+    =>
+        https://pouhon.net/kotlin-number/3183/
+         ＞ ビット演算子

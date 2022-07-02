@@ -5,7 +5,7 @@ import java.util.*
 import kotlin.math.*
 
 @Suppress("unused", "PrivatePropertyName")
-class ABC255 {
+class ABC256 {
 
     private var N = 0
     var result = 0
