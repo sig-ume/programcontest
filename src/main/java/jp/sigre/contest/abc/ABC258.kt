@@ -128,7 +128,38 @@ class ABC258 {
     }
 
     private fun d() {
+        val writer = PrintWriter(System.out, false)
+        val sc = Scanner()
+        val N = sc.nextInt()
+        val X = sc.nextInt()
+        var befTime = 0L
+        var befCount = 0
+        var result = Long.MAX_VALUE
 
+        repeat(N) {
+            val a = sc.nextLong()
+            val b = sc.nextLong()
+
+            //対象回のストーリーまで befTime に
+            befTime += a
+
+            if (X - befCount == 0) return@repeat
+
+            result = min(result, befTime + b * (X - befCount))
+
+            if (result < 0) {
+                throw Exception()
+            }
+
+            // 事後処理 事前にクリアした回数
+            befCount++
+
+            // ゲームプレイを事前に追加
+            befTime += b
+        }
+
+        writer.println(result)
+        writer.flush()
     }
 
     // region Scanner
