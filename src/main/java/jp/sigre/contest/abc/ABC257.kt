@@ -73,42 +73,53 @@ class ABC257 {
     }
 
     private fun d() {
-
         val writer = PrintWriter(System.out, false)
+        val sc = Scanner()
+        val N = sc.nextInt()
 
-        N = nextInt()
+        val js = arrayListOf<Triple<Long, Long, Long>>()
+        val dp = Array(N) { LongArray(N) }
 
-        val list = ArrayList<Pair<Int, Int>>()
-
-        repeat(N) {
-            val l = nextInt()
-            val r = nextInt()
-            list.add(Pair(l, r))
+        for (i in 0 until N) {
+            val x = sc.nextLong()
+            val y = sc.nextLong()
+            val p = sc.nextLong()
+            js.add(Triple(x, y, p))
         }
 
-        list.sortBy { pair -> pair.first }
-
-        val result = ArrayList<Pair<Int, Int>>()
-        var pair1 = Pair(0, 0)
-
-        for (pair in list) {
-            pair1 = if (pair1.first == 0) pair
-            else {
-                if (pair.first <= pair1.second) {
-                    pair1.copy(second = max(pair1.second, pair.second))
-                } else {
-                    result.add(pair1)
-                    pair
+        for (i in 0 until N) {
+            for (j in 0 until N) {
+                val ji = js[i]
+                val jj = js[j]
+                dp[i][j] = if (i == j) 0
+                else {
+//                val d = (abs(ji.first - jj.first) + abs(ji.second - jj.second)).toDouble()
+//                ceil(
+//                    d / ji.third
+//                ).toLong()
+                    (abs(ji.first - jj.first) + abs(ji.second - jj.second) + ji.third - 1) / ji.third
                 }
             }
         }
 
-        if (pair1.first != 0) result.add(pair1)
-
-        for (r in result) {
-            println("${r.first} ${r.second}")
+        for (k in 0 until N) {
+            for (i in 0 until N) {
+                for (j in 0 until N) {
+                    dp[i][j] = min(dp[i][j], max(dp[i][k], dp[k][j]))
+                }
+            }
         }
 
+        var result = Long.MAX_VALUE
+        for (i in 0 until N) {
+            var tmp = Long.MIN_VALUE
+            for (j in 0 until N) {
+                tmp = max(tmp, dp[i][j])
+            }
+            result = min(result, tmp)
+        }
+
+        writer.println(result)
         writer.flush()
     }
 
