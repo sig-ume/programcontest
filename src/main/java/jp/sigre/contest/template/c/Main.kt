@@ -5,7 +5,7 @@ import java.util.*
 
 fun main() {
     val writer = PrintWriter(System.out, false)
-    val sc = Scanner();
+    val sc = Scanner()
     val N = sc.nextInt()
     var result = 0
 
