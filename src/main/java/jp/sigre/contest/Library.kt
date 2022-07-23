@@ -172,48 +172,6 @@ public fun getPrimeArrayUnder(maxNumber: Int): List<Int> {
     return primeNumbers
 }
 
-/**
- * @param xs  Integer配列
- * @param key 探索する値
- * @return 「指定した値以上の要素」が初めて出現した位置
- */
-@Suppress("unused", "RedundantVisibilityModifier")
-public fun lowerBound(xs: IntArray, key: Int): Int {
-    val xs2 = arrayOfNulls<Int>(xs.size)
-    for (i in xs.indices) {
-        xs2[i] = xs[i]
-    }
-    return lowerBound(xs2, key)
-}
-
-@Suppress("unused", "RedundantVisibilityModifier")
-public fun lowerBound(xs: Array<Int?>, key: Int): Int {
-    val lowerBoundComparator = LowerBoundComparator<Int>()
-    val result = Arrays.binarySearch(xs, key, lowerBoundComparator)
-    return if (result >= 0) result else result.inv()
-}
-
-/**
- * @param xs  Integer配列
- * @param key 探索する値
- * @return 「指定した値より大きい要素」が初めて出現した位置
- */
-@Suppress("unused", "RedundantVisibilityModifier")
-public fun upperBound(xs: IntArray, key: Int): Int {
-    val xs2 = arrayOfNulls<Int>(xs.size)
-    for (i in xs.indices) {
-        xs2[i] = xs[i]
-    }
-    return upperBound(xs2, key)
-}
-
-@Suppress("unused", "RedundantVisibilityModifier")
-public fun upperBound(xs: Array<Int?>, key: Int): Int {
-    val upperBoundComparator = UpperBoundComparator<Int>()
-    val result = Arrays.binarySearch(xs, key, upperBoundComparator)
-    return if (result >= 0) result else result.inv()
-}
-
 // 最大公約数を求める。
 @Suppress("unused", "RedundantVisibilityModifier")
 public fun calcGcd(m: Long, n: Long): Long {
@@ -241,14 +199,112 @@ public fun calcLcm(m: Long, n: Long): Long {
 
 private class Stone(var weight: Int, var value: Long)
 
-internal class LowerBoundComparator<T : Comparable<T>?> : Comparator<T> {
-    override fun compare(x: T, y: T): Int {
-        return if (x!! >= y) 1 else -1
+/**
+ * 二分探索
+ * 一般化した二分探索の例
+ *myBinarySearch(0, 100) { it * it > 50 } // -> 8
+ *
+ * 逆からも探索可能
+ * myBinarySearch(100, 0) { it * it < 50 } // -> 7
+ *
+ * List の拡張関数として使う例 （Array も同様）
+ * val list = listOf(2, 4, 6, 8, 10)
+ * list.myBinarySearch { it >= 5 } // -> 2
+ *
+ * 条件に合うものが存在しない場合: 配列の長さと同じ値
+ */
+fun myBinarySearch(begin: Int, end: Int, isOk: (key: Int) -> Boolean): Int {
+    var ng = begin
+    var ok = end
+
+    while (Math.abs(ok - ng) > 1) {
+        val mid = (ok + ng) / 2
+        if (isOk(mid)) {
+            ok = mid
+        } else {
+            ng = mid
+        }
     }
+
+    return ok
 }
 
-internal class UpperBoundComparator<T : Comparable<T>?> : Comparator<T> {
-    override fun compare(x: T, y: T): Int {
-        return if (x!! > y) 1 else -1
+fun <T> List<T>.myBinarySearch(isOk: (T) -> Boolean): Int {
+    return myBinarySearch(-1, size) { index -> isOk(get(index)) }
+}
+
+fun <T> Array<T>.myBinarySearch(isOk: (T) -> Boolean): Int {
+    return myBinarySearch(-1, size) { index -> isOk(get(index)) }
+}
+
+fun lower_bound(ints: IntArray, i: Int): Int {
+    return ints.toTypedArray().myBinarySearch { it >= i }
+}
+
+fun upper_bound(ints: IntArray, i: Int): Int {
+    return ints.toTypedArray().myBinarySearch { it > i }
+}
+
+@Suppress("unused", "RedundantVisibilityModifier")
+public fun runLength(S: String): List<Pair<Char, Int>> {
+    val list = mutableListOf<Pair<Char, Int>>()
+
+    var idx = 0
+    while (idx < S.length) {
+        val c = S[idx]
+        var cnt = 0
+        for (i in idx until S.length) {
+            val c2 = S[i]
+            if (c == c2) cnt++
+            else break
+        }
+        list.add(Pair(c, cnt))
+        idx += cnt
+    }
+
+    return list
+}
+
+/**
+ *
+ * UnionFind
+ */
+private class UnionFind(var n: Int) {
+    var par: IntArray = IntArray(n + 1)
+    var sizes: IntArray = IntArray(n + 1)
+    fun find(x: Int): Int {
+        return if (x == par[x]) x else find(par[x]).also { par[x] = it }
+    }
+
+    fun unite(ad: Int, bd: Int) {
+        var a = find(ad)
+        var b = find(bd)
+        if (a == b) return
+        if (sizes[a] < sizes[b]) {
+            val tmp = b
+            b = a
+            a = tmp
+        }
+        par[b] = a
+        sizes[a] += sizes[b]
+    }
+
+    fun isSameTree(a: Int, b: Int): Boolean {
+        return find(a) == find(b)
+    }
+
+    fun size(a: Int): Int {
+        return sizes[find(a)]
+    }
+
+    private fun setup() {
+        for (i in 0..n) {
+            par[i] = i
+            sizes[i] = 1
+        }
+    }
+
+    init {
+        setup()
     }
 }

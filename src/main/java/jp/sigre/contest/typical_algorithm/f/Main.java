@@ -3,9 +3,6 @@ package jp.sigre.contest.typical_algorithm.f;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * 最小全域木(UnionFind、クラスカル法)
- */
 public class Main {
 
     static long res = 0;

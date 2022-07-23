@@ -1,3 +1,8 @@
+UnionFind法
+・使い方を再確認
+    ・グループ一覧を取得できる？
+    ・findは何をする？
+・ABC260-Dが使うはずなのでとく
 https://atcoder.jp/contests/dp
 abc248,d
 https://atcoder.jp/contests/abc250/tasks/abc250_d
