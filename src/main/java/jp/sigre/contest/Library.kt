@@ -202,16 +202,17 @@ private class Stone(var weight: Int, var value: Long)
 /**
  * 二分探索
  * 一般化した二分探索の例
- *myBinarySearch(0, 100) { it * it > 50 } // -> 8
+ * myBinarySearch(0, 100) { it * it > 50 } // -> 8(条件のうち最小)
  *
  * 逆からも探索可能
- * myBinarySearch(100, 0) { it * it < 50 } // -> 7
+ * myBinarySearch(100, 0) { it * it < 50 } // -> 7(条件のうち最大)
  *
  * List の拡張関数として使う例 （Array も同様）
  * val list = listOf(2, 4, 6, 8, 10)
  * list.myBinarySearch { it >= 5 } // -> 2
  *
  * 条件に合うものが存在しない場合: 配列の長さと同じ値
+ * begin は必ず NG になるので、begin が解になりうる場合は -1 しておくこと(逆順の場合は + 1)
  */
 fun myBinarySearch(begin: Int, end: Int, isOk: (key: Int) -> Boolean): Int {
     var ng = begin

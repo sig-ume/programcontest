@@ -12,6 +12,10 @@
     // 直接toInt()すると48になる
     // Character.getNumericValue や 0 を引くのも可
 
+<Int, Long>
+・切り上げ
+    ans = (x + y - 1) / y;
+
 ＜string＞
 ・Char配列に変換
     => string.toCharArray()
