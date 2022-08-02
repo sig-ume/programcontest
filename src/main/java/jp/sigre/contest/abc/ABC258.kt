@@ -1,8 +1,10 @@
 package jp.sigre.contest.abc
 
+import jp.sigre.contest.Scanner
 import java.io.PrintWriter
 import java.util.*
-import kotlin.math.*
+import kotlin.math.max
+import kotlin.math.min
 
 @Suppress("unused", "PrivatePropertyName")
 class ABC258 {
@@ -19,7 +21,7 @@ class ABC258 {
         var m = (K - (h * 60)).toString()
         if (m.length == 1) m = "0$m"
 
-        writer.println((21+h).toString() + ":" + m)
+        writer.println((21 + h).toString() + ":" + m)
         writer.flush()
     }
 

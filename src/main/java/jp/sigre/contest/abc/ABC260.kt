@@ -1,9 +1,8 @@
 package jp.sigre.contest.abc
 
+import jp.sigre.contest.Scanner
 import java.io.PrintWriter
 import java.util.*
-import kotlin.math.cos
-import kotlin.math.sin
 
 @Suppress("unused", "PrivatePropertyName")
 class ABC260 {
@@ -16,12 +15,12 @@ class ABC260 {
         val sc = Scanner()
         val S = sc.next()
 
-        for(c in S) {
+        for (c in S) {
             var count = 0
             for (c2 in S) {
                 if (c == c2) count++
             }
-            if (count==1) {
+            if (count == 1) {
                 writer.println(c)
                 writer.flush()
                 return
@@ -49,14 +48,16 @@ class ABC260 {
             list.add(Triple(i + 1, a, b))
         }
 
-        val list2 = list.sortedWith(compareByDescending <Triple<Int, Int, Int>> { it.second }.thenBy { it.first }).toMutableList()
+        val list2 = list.sortedWith(compareByDescending<Triple<Int, Int, Int>> { it.second }.thenBy { it.first })
+            .toMutableList()
 
         repeat(X) {
             result.add(list2[0].first)
             list2.removeAt(0)
         }
 
-        val list3 = list2.sortedWith(compareByDescending <Triple<Int, Int, Int>> { it.third }.thenBy { it.first }).toMutableList()
+        val list3 = list2.sortedWith(compareByDescending<Triple<Int, Int, Int>> { it.third }.thenBy { it.first })
+            .toMutableList()
 
         repeat(Y) {
             result.add(list3[0].first)
@@ -64,7 +65,8 @@ class ABC260 {
         }
 
         val list4 =
-            list3.sortedWith(compareByDescending <Triple<Int, Int, Int>> { it.third + it.second }.thenBy { it.first }).toMutableList()
+            list3.sortedWith(compareByDescending<Triple<Int, Int, Int>> { it.third + it.second }.thenBy { it.first })
+                .toMutableList()
 
         repeat(Z) {
             result.add(list4[0].first)

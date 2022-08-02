@@ -1,4 +1,4 @@
-package jp.sigre.contest.abc
+package jp.sigre.contest
 
 import java.util.*
 

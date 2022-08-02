@@ -1,5 +1,6 @@
 package jp.sigre.contest.abc
 
+import jp.sigre.contest.Scanner
 import java.io.PrintWriter
 import java.util.*
 import kotlin.math.max

@@ -1,7 +1,7 @@
 package jp.sigre.contest.abc
 
+import jp.sigre.contest.Scanner
 import java.io.PrintWriter
-import java.util.*
 
 @Suppress("unused", "PrivatePropertyName")
 class ABC261 {
@@ -103,21 +103,4 @@ class ABC261 {
     private fun d() {
 
     }
-
-    // region Scanner
-    private var st = StringTokenizer("")
-    private val br = System.`in`.bufferedReader()
-
-    fun next(): String {
-        while (!st.hasMoreTokens()) st = StringTokenizer(br.readLine())
-        return st.nextToken()
-    }
-
-    private fun nextInt() = next().toInt()
-    private fun nextLong() = next().toLong()
-    private fun nextDouble() = next().toDouble()
-
-    private fun nextLine() = br.readLine()!!
-    private fun nextInts() = nextLine().split(" ").map(String::toInt)
-    private fun nextStrings() = nextLine().split(" ")
 }

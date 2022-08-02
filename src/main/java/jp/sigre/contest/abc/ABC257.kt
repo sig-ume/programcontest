@@ -1,8 +1,11 @@
 package jp.sigre.contest.abc
 
+import jp.sigre.contest.Scanner
 import java.io.PrintWriter
 import java.util.*
-import kotlin.math.*
+import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
 @Suppress("unused", "PrivatePropertyName")
 class ABC257 {
@@ -18,7 +21,7 @@ class ABC257 {
 
         var o = X / N
         if (X % N != 0) o++
-        println((96+o).toChar().toUpperCase())
+        println((96 + o).toChar().toUpperCase())
 
         writer.flush()
     }
