@@ -44,7 +44,10 @@
 ＜リスト＞
 ・宣言(編集可能)
     => val list = mutableListOf<Pair<Int, Int>>()
-
+    => val sums = MutableList(N) {
+            sum += sc.nextLong()
+            sum
+        }
 ＜ビット演算＞
 ・シフト、比較
     =>
