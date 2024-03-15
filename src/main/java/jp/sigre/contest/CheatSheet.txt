@@ -26,9 +26,9 @@
     => az.all { a -> 条件 }
     // どれか1つが条件を満たすなら any
 ・二重配列
-        val arr1 = Array(N) {
-            arrayOfNulls<String>(N)
-        }
+    val arr1 = Array(N) {
+        arrayOfNulls<String>(N)
+    }
 
 ＜Pair＞
 ・2つの値でソート
