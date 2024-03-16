@@ -16,6 +16,9 @@
 ・切り上げ
     ans = (x + y - 1) / y;
 
+・絶対値
+    Mas.abs(x-y)
+
 ＜string＞
 ・Char配列に変換
     => string.toCharArray()
